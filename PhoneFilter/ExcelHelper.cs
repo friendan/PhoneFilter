@@ -11,6 +11,9 @@ namespace PhoneFilter
 {
     public class ExcelHelper
     {
+        private static int mXlsFileIndex = 1;
+        private static int mVcfFileIndex = 1;
+
         public static void ParseExcel(string path)
         {
             if(System.IO.File.Exists(path) == false)
@@ -91,6 +94,22 @@ namespace PhoneFilter
             return listRow;
         }
 
+        public static string getNewXlsFilePath(string xlsFilePath)
+        {
+            mXlsFileIndex += 1;
+            string fName = Path.GetFileNameWithoutExtension(xlsFilePath);
+            string fPath = string.Format(@"{0}\data\{1}_{2}.xls", Environment.CurrentDirectory, fName, mXlsFileIndex);
+            return fPath;
+        }
+
+        public static string getNewVcfFilePath(string vcfFilePath)
+        {
+            mVcfFileIndex += 1;
+            string fName = Path.GetFileNameWithoutExtension(vcfFilePath);
+            string fPath = string.Format(@"{0}\data\{1}_{2}.vcf", Environment.CurrentDirectory, fName, mVcfFileIndex);
+            return fPath;
+        }
+
         public static void saveXls(List<ExcelRow> listRow, string templatePath, string xlsFilePath)
         {
             if (System.IO.File.Exists(templatePath) == false)
@@ -99,6 +118,7 @@ namespace PhoneFilter
                 return;
             }
 
+            string xlsFilePathBK = xlsFilePath;
             Aspose.Cells.Workbook workbook = new Aspose.Cells.Workbook(templatePath);
             Aspose.Cells.Worksheet sheet = (Aspose.Cells.Worksheet)workbook.Worksheets["Sheet"];
             Dictionary<string, string> dtPhones = new Dictionary<string, string>();
@@ -107,10 +127,14 @@ namespace PhoneFilter
                 return;
             }
 
+            int writeNum = 0;
             int row = 2;
+            bool isSave = false;
+
             foreach (ExcelRow excelRow in listRow)
             {
                 if (excelRow.getPhoneNum() <= 0) continue;
+                isSave = false;
 
                 if (PublicConfig.ExportCompanyName)
                 {
@@ -125,6 +149,20 @@ namespace PhoneFilter
                         sheet.Cells["C" + row].PutValue(phone);
                         dtPhones[phone] = string.Empty;
                         row += 1;
+                        writeNum += 1;
+
+                        // 换文件写
+                        if(PublicConfig.FileRowNum > 0 && writeNum >= PublicConfig.FileRowNum)
+                        {
+                            writeNum = 0;
+                            workbook.Save(xlsFilePath);
+                            xlsFilePath = getNewXlsFilePath(xlsFilePathBK);
+                            workbook = new Aspose.Cells.Workbook(templatePath);
+                            sheet = (Aspose.Cells.Worksheet)workbook.Worksheets["Sheet"];
+                            isSave = true;
+                            row = 2;
+                        }
+
                     }
                 }
                 else
@@ -139,17 +177,38 @@ namespace PhoneFilter
                         sheet.Cells["B" + row].PutValue(phone);
                         dtPhones[phone] = string.Empty;
                         row += 1;
+                        writeNum += 1;
+
+                        // 换文件写
+                        if (PublicConfig.FileRowNum > 0 && writeNum >= PublicConfig.FileRowNum)
+                        {
+                            writeNum = 0;
+                            workbook.Save(xlsFilePath);
+                            xlsFilePath = getNewXlsFilePath(xlsFilePathBK);
+                            workbook = new Aspose.Cells.Workbook(templatePath);
+                            sheet = (Aspose.Cells.Worksheet)workbook.Worksheets["Sheet"];
+                            isSave = true;
+                            row = 2;
+                        }
+
+
                     }
                 }
             }
 
-            workbook.Save(xlsFilePath);
+            if(isSave == false)
+            {
+                workbook.Save(xlsFilePath);
+            }
+
             GC.Collect();
         }
 
 
         public static void saveVcf(List<ExcelRow> listRow, string vcfFilePath)
         {
+            string vcfFilePathBK = vcfFilePath;
+
             Dictionary<string, string> dtPhones = new Dictionary<string, string>();
 
             UTF8Encoding utf8 = new UTF8Encoding(false); // true是BOM的编码模式
@@ -160,14 +219,13 @@ namespace PhoneFilter
             }
 
             int row = 2;
+            int writeNum = 0;
+            bool isSave = false;
+
             foreach (ExcelRow excelRow in listRow)
             {
                 if (excelRow.getPhoneNum() <= 0) continue;
-
-                sWriter.WriteLine("BEGIN:VCARD");
-                sWriter.WriteLine("VERSION:3.0");
-                sWriter.WriteLine("FN:" + excelRow.Name);
-                sWriter.WriteLine("ORG:" + excelRow.CompanyName);
+                isSave = false;
 
                 foreach (string phone in excelRow.PhoneData.Keys)
                 {
@@ -175,17 +233,37 @@ namespace PhoneFilter
                     {
                         continue;
                     }
+
+                    sWriter.WriteLine("BEGIN:VCARD");
+                    sWriter.WriteLine("VERSION:3.0");
+                    sWriter.WriteLine("FN:" + excelRow.Name);
+                    sWriter.WriteLine("ORG:" + excelRow.CompanyName);
                     sWriter.WriteLine("TEL;TYPE=mobile:" + phone);
+                    sWriter.WriteLine("END:VCARD");
+                    sWriter.WriteLine();
+
                     dtPhones[phone] = string.Empty;
                     row += 1;
-                }
+                    writeNum += 1;
 
-                sWriter.WriteLine("END:VCARD");
-                sWriter.WriteLine();
+                    // 换文件写
+                    if (PublicConfig.FileRowNum > 0 && writeNum >= PublicConfig.FileRowNum)
+                    {
+                        writeNum = 0;
+                        sWriter.Close();
+                        vcfFilePath = getNewVcfFilePath(vcfFilePathBK);
+                        sWriter = new StreamWriter(vcfFilePath, false, utf8);
+                        isSave = true;
+                    }
+
+                }
             }
 
-
-            sWriter.Close();
+            if (isSave == false)
+            {
+                sWriter.Close();
+            }
+            
         }
 
 

@@ -21,5 +21,6 @@ namespace PhoneFilter
         public static bool FilterSamePhone = false; // 是否过滤相同手机号码
         public static double AppNow = 0;
         public static double AppLimit = 63808128000;
+        public static int FileRowNum = 300;
     }
 }

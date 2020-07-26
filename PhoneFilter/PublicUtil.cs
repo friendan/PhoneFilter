@@ -29,6 +29,7 @@ namespace PhoneFilter
             if (phone.Length <= 5) return false;
             if (string.IsNullOrEmpty(phone)) return false;
             if (phone.Trim().Length < 11) return false;
+            if (phone.Trim().StartsWith("1") == false) return false;
 
             return IsNumber(phone.Trim());
         }

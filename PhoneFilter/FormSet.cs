@@ -55,11 +55,17 @@ namespace PhoneFilter
             chbExportGSNB.Checked = PublicConfig.ExportGSNB;
             chbExportMorePhone.Checked = PublicConfig.ExportMorePhone;
             chbExportZuoJi.Checked = PublicConfig.ExportZuoJi;
+            txbFileRowNum.Text = PublicConfig.FileRowNum.ToString();
         }
 
         private void chbFilterSamePhone_CheckedChanged(object sender, EventArgs e)
         {
             PublicConfig.FilterSamePhone = chbFilterSamePhone.Checked;
+        }
+
+        private void FormSet_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            PublicConfig.FileRowNum = Convert.ToInt32(txbFileRowNum.Text);
         }
     }
 }

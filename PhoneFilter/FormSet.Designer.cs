@@ -37,7 +37,11 @@
             this.chbExportZuoJi = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chbFilterSamePhone = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txbFileRowNum = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // chbExportCompanyName
@@ -114,7 +118,7 @@
             this.groupBox1.Controls.Add(this.chbExportMorePhone);
             this.groupBox1.Controls.Add(this.chbExportName);
             this.groupBox1.Controls.Add(this.chbExportGSNB);
-            this.groupBox1.Location = new System.Drawing.Point(57, 12);
+            this.groupBox1.Location = new System.Drawing.Point(37, 168);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(199, 243);
             this.groupBox1.TabIndex = 1;
@@ -123,7 +127,7 @@
             // chbFilterSamePhone
             // 
             this.chbFilterSamePhone.AutoSize = true;
-            this.chbFilterSamePhone.Location = new System.Drawing.Point(285, 43);
+            this.chbFilterSamePhone.Location = new System.Drawing.Point(26, 33);
             this.chbFilterSamePhone.Name = "chbFilterSamePhone";
             this.chbFilterSamePhone.Size = new System.Drawing.Size(149, 19);
             this.chbFilterSamePhone.TabIndex = 2;
@@ -131,12 +135,39 @@
             this.chbFilterSamePhone.UseVisualStyleBackColor = true;
             this.chbFilterSamePhone.CheckedChanged += new System.EventHandler(this.chbFilterSamePhone_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "文件分割：";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txbFileRowNum);
+            this.groupBox2.Controls.Add(this.chbFilterSamePhone);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(278, 173);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(361, 238);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            // 
+            // txbFileRowNum
+            // 
+            this.txbFileRowNum.Location = new System.Drawing.Point(111, 67);
+            this.txbFileRowNum.Name = "txbFileRowNum";
+            this.txbFileRowNum.Size = new System.Drawing.Size(125, 25);
+            this.txbFileRowNum.TabIndex = 4;
+            // 
             // FormSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 267);
-            this.Controls.Add(this.chbFilterSamePhone);
+            this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -144,11 +175,13 @@
             this.Name = "FormSet";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "参数设置";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSet_FormClosing);
             this.Load += new System.EventHandler(this.FormSet_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -162,5 +195,8 @@
         private System.Windows.Forms.CheckBox chbExportZuoJi;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox chbFilterSamePhone;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txbFileRowNum;
     }
 }
