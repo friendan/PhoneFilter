@@ -11,8 +11,8 @@ namespace PhoneFilter
 {
     public class ExcelHelper
     {
-        private static int mXlsFileIndex = 1;
-        private static int mVcfFileIndex = 1;
+        private static int mXlsFileIndex = 0;
+        private static int mVcfFileIndex = 0;
 
         public static void ParseExcel(string path)
         {
@@ -27,8 +27,13 @@ namespace PhoneFilter
             {
                 dstFileName += "_2";
             }
-            string dstFilePath = string.Format(@"{0}\data\{1}.xls", Environment.CurrentDirectory, dstFileName);
+
+            string dstFilePath = string.Format(@"{0}\data\{1}\xls\{2}.xls", 
+                Environment.CurrentDirectory, 
+                dstFileName,
+                dstFileName);
             PublicUtil.MakeSureDirectoryPathExists(dstFilePath);
+            
 
             List<ExcelRow> listRow = getRowList(path);
             if(PublicConfig.ExportCompanyName)
@@ -55,8 +60,13 @@ namespace PhoneFilter
             {
                 dstFileName += "_2";
             }
-            string dstFilePath = string.Format(@"{0}\data\{1}.vcf", Environment.CurrentDirectory, dstFileName);
+            string dstFilePath = string.Format(@"{0}\data\{1}\vcf\{2}.vcf", 
+                Environment.CurrentDirectory, 
+                dstFileName,
+                dstFileName);
+
             PublicUtil.MakeSureDirectoryPathExists(dstFilePath);
+            
 
             List<ExcelRow> listRow = getRowList(path);
             if (PublicConfig.ExportCompanyName)
@@ -103,7 +113,11 @@ namespace PhoneFilter
         {
             mXlsFileIndex += 1;
             string fName = Path.GetFileNameWithoutExtension(xlsFilePath);
-            string fPath = string.Format(@"{0}\data\{1}_{2}.xls", Environment.CurrentDirectory, fName, mXlsFileIndex);
+            string fPath = string.Format(@"{0}\data\{1}\xls\{2}_{3}.xls", 
+                Environment.CurrentDirectory, 
+                fName, 
+                fName,
+                mXlsFileIndex);
             return fPath;
         }
 
@@ -111,7 +125,11 @@ namespace PhoneFilter
         {
             mVcfFileIndex += 1;
             string fName = Path.GetFileNameWithoutExtension(vcfFilePath);
-            string fPath = string.Format(@"{0}\data\{1}_{2}.vcf", Environment.CurrentDirectory, fName, mVcfFileIndex);
+            string fPath = string.Format(@"{0}\data\{1}\vcf\{2}_{3}.vcf", 
+                Environment.CurrentDirectory, 
+                fName, 
+                fName,
+                mVcfFileIndex);
             return fPath;
         }
 
