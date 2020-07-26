@@ -80,7 +80,12 @@ namespace PhoneFilter
             for (int row = 2; row <= cells.MaxDataRow; row++)
             {
                 ExcelRow excelRow = new ExcelRow();
-                excelRow.CompanyName = cells.GetCell(row, 1).StringValue;
+                excelRow.CompanyName = cells.GetCell(row, 1).StringValue; // 公司名称
+                if(PublicConfig.IsFilterCompanyName(excelRow.CompanyName))
+                {
+                    continue;
+                }
+
                 excelRow.Name        = cells.GetCell(row, 2).StringValue;   // 法定代表人
                 excelRow.Phone       = cells.GetCell(row, 11).StringValue;
                 excelRow.GSNB        = cells.GetCell(row, 12).StringValue;   // 工商年报电话

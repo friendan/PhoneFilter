@@ -28,6 +28,7 @@ namespace PhoneFilter
             PublicConfig.XlsTemplatePath2 = Environment.CurrentDirectory + @"\导出模板2.xls";
             LogHelper.showLog("拖动文件到程序窗口，然后导出即可!");
 
+            PublicConfig.InitFilterCompanyName();
             DateTime dt = DateTime.Now;
             TimeSpan tSpan = new TimeSpan(dt.Ticks);
             PublicConfig.AppNow = tSpan.TotalSeconds;

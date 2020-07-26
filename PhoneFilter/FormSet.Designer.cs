@@ -40,8 +40,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txbFileRowNum = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txbFilterCompanyName = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // chbExportCompanyName
@@ -151,7 +154,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(278, 173);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(361, 238);
+            this.groupBox2.Size = new System.Drawing.Size(442, 238);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
@@ -162,11 +165,32 @@
             this.txbFileRowNum.Size = new System.Drawing.Size(125, 25);
             this.txbFileRowNum.TabIndex = 4;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txbFilterCompanyName);
+            this.groupBox3.Location = new System.Drawing.Point(37, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(683, 153);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "名称过滤：";
+            // 
+            // txbFilterCompanyName
+            // 
+            this.txbFilterCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txbFilterCompanyName.Location = new System.Drawing.Point(3, 21);
+            this.txbFilterCompanyName.Multiline = true;
+            this.txbFilterCompanyName.Name = "txbFilterCompanyName";
+            this.txbFilterCompanyName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txbFilterCompanyName.Size = new System.Drawing.Size(677, 129);
+            this.txbFilterCompanyName.TabIndex = 0;
+            // 
             // FormSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -181,6 +205,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +224,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txbFileRowNum;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txbFilterCompanyName;
     }
 }

@@ -49,6 +49,7 @@ namespace PhoneFilter
 
         private void FormSet_Load(object sender, EventArgs e)
         {
+            txbFilterCompanyName.Text = PublicConfig.FilterCompanyName;
             chbExportCompanyName.Checked = PublicConfig.ExportCompanyName;
             chbExportName.Checked = PublicConfig.ExportName;
             chbExportPhone.Checked = PublicConfig.ExportPhone;
@@ -56,6 +57,7 @@ namespace PhoneFilter
             chbExportMorePhone.Checked = PublicConfig.ExportMorePhone;
             chbExportZuoJi.Checked = PublicConfig.ExportZuoJi;
             txbFileRowNum.Text = PublicConfig.FileRowNum.ToString();
+            
         }
 
         private void chbFilterSamePhone_CheckedChanged(object sender, EventArgs e)
@@ -66,6 +68,8 @@ namespace PhoneFilter
         private void FormSet_FormClosing(object sender, FormClosingEventArgs e)
         {
             PublicConfig.FileRowNum = Convert.ToInt32(txbFileRowNum.Text);
+            PublicConfig.FilterCompanyName = txbFilterCompanyName.Text;
+            PublicConfig.InitFilterCompanyName();
         }
     }
 }

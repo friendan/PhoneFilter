@@ -22,5 +22,28 @@ namespace PhoneFilter
         public static double AppNow = 0;
         public static double AppLimit = 63808128000;
         public static int FileRowNum = 300;
+
+        // 过滤公司名称字符串
+        public static string FilterCompanyName = "银行|超市|连锁|快递|快运|商贸|速运|速递|药房|药店|旅行社|旅游|中国|联通|电信|移动|保险|农资|营业厅|劳务";
+        public static Dictionary<string, string> DtFilterCompanyName = new Dictionary<string, string>();
+        public static void InitFilterCompanyName()
+        {
+            DtFilterCompanyName.Clear();
+            string[] dataList = FilterCompanyName.Split(new string[]{"|"}, StringSplitOptions.RemoveEmptyEntries);
+            foreach(string data in dataList)
+            {
+                if (data.Trim().Length <= 0) return;
+                DtFilterCompanyName[data.Trim()] = string.Empty;
+            }
+        }
+        public static bool IsFilterCompanyName(string name)
+        {
+            foreach(string item in DtFilterCompanyName.Keys)
+            {
+                if (name.Contains(item)) return true;
+            }
+            return false;
+        }
+
     }
 }
