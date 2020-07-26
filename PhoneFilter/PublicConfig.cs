@@ -24,6 +24,7 @@ namespace PhoneFilter
         public static double AppNow = 0;
         public static double AppLimit = 63808128000;
         public static int FileRowNum = 300;
+        public static string SaveDir = string.Empty;
 
         public static void ReadConfig()
         {
@@ -36,6 +37,11 @@ namespace PhoneFilter
             FilterSamePhone = Convert.ToBoolean(PublicConfig.getAppSetting("FilterSamePhone"));
             FileRowNum = Convert.ToInt32(PublicConfig.getAppSetting("FileRowNum"));
             FilterCompanyName = PublicConfig.getAppSetting("FilterCompanyName");
+            SaveDir = PublicConfig.getAppSetting("SaveDir");
+            if(SaveDir.Length <= 0 || System.IO.Directory.Exists(SaveDir) == false)
+            {
+                SaveDir = Environment.CurrentDirectory;
+            }
         }
 
         public static void SaveConfig()
@@ -49,6 +55,7 @@ namespace PhoneFilter
             PublicConfig.setAppSetting("FilterSamePhone", FilterSamePhone.ToString());
             PublicConfig.setAppSetting("FileRowNum", FileRowNum.ToString());
             PublicConfig.setAppSetting("FilterCompanyName", FilterCompanyName);
+            PublicConfig.setAppSetting("SaveDir", SaveDir);
         }
 
         // 过滤公司名称字符串

@@ -29,7 +29,7 @@ namespace PhoneFilter
             }
 
             string dstFilePath = string.Format(@"{0}\data\{1}\xls\{2}.xls", 
-                Environment.CurrentDirectory, 
+                PublicConfig.SaveDir, 
                 dstFileName,
                 dstFileName);
             PublicUtil.MakeSureDirectoryPathExists(dstFilePath);
@@ -60,8 +60,8 @@ namespace PhoneFilter
             {
                 dstFileName += "_2";
             }
-            string dstFilePath = string.Format(@"{0}\data\{1}\vcf\{2}.vcf", 
-                Environment.CurrentDirectory, 
+            string dstFilePath = string.Format(@"{0}\data\{1}\vcf\{2}.vcf",
+                PublicConfig.SaveDir, 
                 dstFileName,
                 dstFileName);
 
@@ -113,8 +113,8 @@ namespace PhoneFilter
         {
             mXlsFileIndex += 1;
             string fName = Path.GetFileNameWithoutExtension(xlsFilePath);
-            string fPath = string.Format(@"{0}\data\{1}\xls\{2}_{3}.xls", 
-                Environment.CurrentDirectory, 
+            string fPath = string.Format(@"{0}\data\{1}\xls\{2}_{3}.xls",
+                PublicConfig.SaveDir, 
                 fName, 
                 fName,
                 mXlsFileIndex);
@@ -125,8 +125,8 @@ namespace PhoneFilter
         {
             mVcfFileIndex += 1;
             string fName = Path.GetFileNameWithoutExtension(vcfFilePath);
-            string fPath = string.Format(@"{0}\data\{1}\vcf\{2}_{3}.vcf", 
-                Environment.CurrentDirectory, 
+            string fPath = string.Format(@"{0}\data\{1}\vcf\{2}_{3}.vcf",
+                PublicConfig.SaveDir, 
                 fName, 
                 fName,
                 mVcfFileIndex);

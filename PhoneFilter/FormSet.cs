@@ -58,7 +58,7 @@ namespace PhoneFilter
             chbExportZuoJi.Checked = PublicConfig.ExportZuoJi;
             chbFilterSamePhone.Checked = PublicConfig.FilterSamePhone;
             txbFileRowNum.Text = PublicConfig.FileRowNum.ToString();
-            
+            txbSaveDir.Text = PublicConfig.SaveDir;
         }
 
         private void chbFilterSamePhone_CheckedChanged(object sender, EventArgs e)
@@ -70,6 +70,7 @@ namespace PhoneFilter
         {
             PublicConfig.FileRowNum = Convert.ToInt32(txbFileRowNum.Text);
             PublicConfig.FilterCompanyName = txbFilterCompanyName.Text;
+            PublicConfig.SaveDir = txbSaveDir.Text;
             PublicConfig.InitFilterCompanyName();
             PublicConfig.SaveConfig();
         }

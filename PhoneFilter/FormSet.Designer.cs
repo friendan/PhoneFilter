@@ -42,9 +42,12 @@
             this.txbFileRowNum = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txbFilterCompanyName = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txbSaveDir = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // chbExportCompanyName
@@ -185,11 +188,29 @@
             this.txbFilterCompanyName.Size = new System.Drawing.Size(677, 129);
             this.txbFilterCompanyName.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txbSaveDir);
+            this.groupBox4.Location = new System.Drawing.Point(37, 434);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(683, 90);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "保存目录：";
+            // 
+            // txbSaveDir
+            // 
+            this.txbSaveDir.Location = new System.Drawing.Point(11, 32);
+            this.txbSaveDir.Name = "txbSaveDir";
+            this.txbSaveDir.Size = new System.Drawing.Size(663, 25);
+            this.txbSaveDir.TabIndex = 0;
+            // 
             // FormSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 457);
+            this.ClientSize = new System.Drawing.Size(778, 543);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -207,6 +228,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -226,5 +249,7 @@
         private System.Windows.Forms.TextBox txbFileRowNum;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txbFilterCompanyName;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox txbSaveDir;
     }
 }
