@@ -56,6 +56,7 @@ namespace PhoneFilter
             chbExportGSNB.Checked = PublicConfig.ExportGSNB;
             chbExportMorePhone.Checked = PublicConfig.ExportMorePhone;
             chbExportZuoJi.Checked = PublicConfig.ExportZuoJi;
+            chbFilterSamePhone.Checked = PublicConfig.FilterSamePhone;
             txbFileRowNum.Text = PublicConfig.FileRowNum.ToString();
             
         }
@@ -70,6 +71,7 @@ namespace PhoneFilter
             PublicConfig.FileRowNum = Convert.ToInt32(txbFileRowNum.Text);
             PublicConfig.FilterCompanyName = txbFilterCompanyName.Text;
             PublicConfig.InitFilterCompanyName();
+            PublicConfig.SaveConfig();
         }
     }
 }

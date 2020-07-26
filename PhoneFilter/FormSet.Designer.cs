@@ -141,7 +141,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 67);
+            this.label1.Location = new System.Drawing.Point(23, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 15);
             this.label1.TabIndex = 3;
@@ -160,7 +160,7 @@
             // 
             // txbFileRowNum
             // 
-            this.txbFileRowNum.Location = new System.Drawing.Point(111, 67);
+            this.txbFileRowNum.Location = new System.Drawing.Point(111, 77);
             this.txbFileRowNum.Name = "txbFileRowNum";
             this.txbFileRowNum.Size = new System.Drawing.Size(125, 25);
             this.txbFileRowNum.TabIndex = 4;
