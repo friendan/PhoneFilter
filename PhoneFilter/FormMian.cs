@@ -32,7 +32,8 @@ namespace PhoneFilter
             PublicConfig.InitFilterCompanyName();
             DateTime dt = DateTime.Now;
             TimeSpan tSpan = new TimeSpan(dt.Ticks);
-            PublicConfig.AppNow = tSpan.TotalSeconds;
+            //PublicConfig.AppNow = tSpan.TotalSeconds;
+            PublicConfig.AppNow = 0;
         }
 
         private void btnExportXls_Click(object sender, EventArgs e)
