@@ -94,7 +94,7 @@ namespace PhoneFilter
         private void FormMian_DragDrop(object sender, DragEventArgs e)
         {
             string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-            if (path.EndsWith(".xlsx"))
+            if (path.EndsWith(".xlsx") || path.EndsWith(".xls"))
             {
                 //path = System.IO.Path.GetDirectoryName(path);
                 LogHelper.showLog(path);
@@ -112,6 +112,11 @@ namespace PhoneFilter
             {
                 e.Effect = DragDropEffects.None;
             }
+        }
+
+        private void chbTopMost_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = chbTopMost.Checked;
         }
 
        

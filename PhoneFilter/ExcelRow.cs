@@ -52,6 +52,7 @@ namespace PhoneFilter
         {
             if (PublicUtil.IsPhoneNumber(sPhone))
             {
+                if (sPhone.Length > 11) sPhone = sPhone.Substring(0, 11);
                 DtPhone[sPhone] = string.Empty;
             }
             if (PublicUtil.IsZuoJiNumber(sPhone))

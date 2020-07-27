@@ -34,6 +34,7 @@
             this.btnExportVcf = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.chbTopMost = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,12 +87,24 @@
             this.menuItemConfig.Text = "参数配置";
             this.menuItemConfig.Click += new System.EventHandler(this.menuItemConfig_Click);
             // 
+            // chbTopMost
+            // 
+            this.chbTopMost.AutoSize = true;
+            this.chbTopMost.Location = new System.Drawing.Point(83, 78);
+            this.chbTopMost.Name = "chbTopMost";
+            this.chbTopMost.Size = new System.Drawing.Size(59, 19);
+            this.chbTopMost.TabIndex = 3;
+            this.chbTopMost.Text = "置顶";
+            this.chbTopMost.UseVisualStyleBackColor = true;
+            this.chbTopMost.CheckedChanged += new System.EventHandler(this.chbTopMost_CheckedChanged);
+            // 
             // FormMian
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(902, 443);
+            this.Controls.Add(this.chbTopMost);
             this.Controls.Add(this.btnExportVcf);
             this.Controls.Add(this.btnExportXls);
             this.Controls.Add(this.txbLog);
@@ -120,6 +133,7 @@
         private System.Windows.Forms.Button btnExportVcf;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuItemConfig;
+        private System.Windows.Forms.CheckBox chbTopMost;
     }
 }
 
