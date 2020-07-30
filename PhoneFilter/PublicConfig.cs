@@ -17,6 +17,8 @@ namespace PhoneFilter
         public static bool ExportMorePhone = true;
         public static bool ExportZuoJi = false;
         public static bool FilterSamePhone = false; // 是否过滤相同手机号码
+        public static bool GetFirstPhone = false;
+        public static bool GetSecondPhone = false;
 
         public static string XlsTemplatePath = string.Empty;
         public static string XlsTemplatePath2 = string.Empty;
@@ -35,6 +37,9 @@ namespace PhoneFilter
             ExportMorePhone = Convert.ToBoolean(PublicConfig.getAppSetting("ExportMorePhone"));
             ExportZuoJi = Convert.ToBoolean(PublicConfig.getAppSetting("ExportZuoJi"));
             FilterSamePhone = Convert.ToBoolean(PublicConfig.getAppSetting("FilterSamePhone"));
+            GetFirstPhone = Convert.ToBoolean(PublicConfig.getAppSetting("GetFirstPhone"));
+            GetSecondPhone = Convert.ToBoolean(PublicConfig.getAppSetting("GetSecondPhone"));
+
             FileRowNum = Convert.ToInt32(PublicConfig.getAppSetting("FileRowNum"));
             FilterCompanyName = PublicConfig.getAppSetting("FilterCompanyName");
             SaveDir = PublicConfig.getAppSetting("SaveDir");
@@ -55,6 +60,9 @@ namespace PhoneFilter
             PublicConfig.setAppSetting("FilterSamePhone", FilterSamePhone.ToString());
             PublicConfig.setAppSetting("FileRowNum", FileRowNum.ToString());
             PublicConfig.setAppSetting("FilterCompanyName", FilterCompanyName);
+            PublicConfig.setAppSetting("GetFirstPhone", GetFirstPhone.ToString());
+            PublicConfig.setAppSetting("GetSecondPhone", GetSecondPhone.ToString());
+
             PublicConfig.setAppSetting("SaveDir", SaveDir);
         }
 

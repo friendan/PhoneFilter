@@ -44,6 +44,8 @@
             this.txbFilterCompanyName = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txbSaveDir = new System.Windows.Forms.TextBox();
+            this.chbGetFirstPhone = new System.Windows.Forms.CheckBox();
+            this.chbGetSecondPhone = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -152,6 +154,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chbGetSecondPhone);
+            this.groupBox2.Controls.Add(this.chbGetFirstPhone);
             this.groupBox2.Controls.Add(this.txbFileRowNum);
             this.groupBox2.Controls.Add(this.chbFilterSamePhone);
             this.groupBox2.Controls.Add(this.label1);
@@ -205,6 +209,28 @@
             this.txbSaveDir.Size = new System.Drawing.Size(663, 25);
             this.txbSaveDir.TabIndex = 0;
             // 
+            // chbGetFirstPhone
+            // 
+            this.chbGetFirstPhone.AutoSize = true;
+            this.chbGetFirstPhone.Location = new System.Drawing.Point(26, 134);
+            this.chbGetFirstPhone.Name = "chbGetFirstPhone";
+            this.chbGetFirstPhone.Size = new System.Drawing.Size(179, 19);
+            this.chbGetFirstPhone.TabIndex = 5;
+            this.chbGetFirstPhone.Text = "只提取第一个手机号码";
+            this.chbGetFirstPhone.UseVisualStyleBackColor = true;
+            this.chbGetFirstPhone.CheckedChanged += new System.EventHandler(this.chbGetFirstPhone_CheckedChanged);
+            // 
+            // chbGetSecondPhone
+            // 
+            this.chbGetSecondPhone.AutoSize = true;
+            this.chbGetSecondPhone.Location = new System.Drawing.Point(26, 168);
+            this.chbGetSecondPhone.Name = "chbGetSecondPhone";
+            this.chbGetSecondPhone.Size = new System.Drawing.Size(179, 19);
+            this.chbGetSecondPhone.TabIndex = 5;
+            this.chbGetSecondPhone.Text = "只提取第二个手机号码";
+            this.chbGetSecondPhone.UseVisualStyleBackColor = true;
+            this.chbGetSecondPhone.CheckedChanged += new System.EventHandler(this.chbGetSecondPhone_CheckedChanged);
+            // 
             // FormSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -251,5 +277,7 @@
         private System.Windows.Forms.TextBox txbFilterCompanyName;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txbSaveDir;
+        private System.Windows.Forms.CheckBox chbGetSecondPhone;
+        private System.Windows.Forms.CheckBox chbGetFirstPhone;
     }
 }

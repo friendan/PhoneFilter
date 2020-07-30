@@ -14,51 +14,86 @@ namespace PhoneFilter
         public string GSNB = string.Empty;  // 工商年报电话
         public string MorePhone = string.Empty;
 
-        public Dictionary<string, string> DtPhone = new Dictionary<string,string>(); // 手机号
-        public Dictionary<string, string> DtGSNBPhone = new Dictionary<string, string>(); // 工商年报手机号
-        public Dictionary<string, string> DtMorePhone = new Dictionary<string, string>(); // 更多手机号
-        public Dictionary<string, string> DtZuoJi = new Dictionary<string,string>(); // 座机号
+        public List<string> DtPhone = new List<string>();       // 手机号
+        public List<string> DtGSNBPhone = new List<string>();   // 工商年报手机号
+        public List<string> DtMorePhone = new List<string>();   // 更多手机号
+        public List<string> DtZuoJi = new List<string>();       // 座机号
 
         // 解析好的电话  直接保存这个就好
         public Dictionary<string, string> PhoneData = new Dictionary<string, string>();
 
         public void parsePhoneData()
         {
+
             // 手机
             if(PublicConfig.ExportPhone)
             {
-                foreach(string phone in DtPhone.Keys)
+                if (PublicConfig.GetFirstPhone && DtPhone.Count > 0) // 只提取第一个手机号
                 {
-                    PhoneData[phone] = string.Empty;
+                    PhoneData[DtPhone[0]] = string.Empty;
                 }
+                else if(PublicConfig.GetSecondPhone && DtPhone.Count >= 2) // 只提取第2个手机号
+                {
+                    PhoneData[DtPhone[1]] = string.Empty;
+                }
+                else
+                {
+                    foreach (string phone in DtPhone)
+                    {
+                        PhoneData[phone] = string.Empty;
+                    }
+                } 
             }
 
             // 工商年报电话
             if(PublicConfig.ExportGSNB)
             {
-                foreach (string phone in DtGSNBPhone.Keys)
+                if (PublicConfig.GetFirstPhone && DtGSNBPhone.Count > 0) // 只提取第一个手机号
                 {
-                    PhoneData[phone] = string.Empty;
+                    PhoneData[DtGSNBPhone[0]] = string.Empty;
                 }
+                else if (PublicConfig.GetSecondPhone && DtGSNBPhone.Count >= 2) // 只提取第2个手机号
+                {
+                    PhoneData[DtGSNBPhone[1]] = string.Empty;
+                }
+                else
+                {
+                    foreach (string phone in DtGSNBPhone)
+                    {
+                        PhoneData[phone] = string.Empty;
+                    }
+                } 
             }
 
             // 更多电话
             if(PublicConfig.ExportMorePhone)
             {
-                foreach (string phone in DtMorePhone.Keys)
+                if (PublicConfig.GetFirstPhone && DtMorePhone.Count > 0) // 只提取第一个手机号
                 {
-                    PhoneData[phone] = string.Empty;
+                    PhoneData[DtMorePhone[0]] = string.Empty;
                 }
+                else if (PublicConfig.GetSecondPhone && DtMorePhone.Count >= 2) // 只提取第2个手机号
+                {
+                    PhoneData[DtMorePhone[1]] = string.Empty;
+                }
+                else
+                {
+                    foreach (string phone in DtMorePhone)
+                    {
+                        PhoneData[phone] = string.Empty;
+                    }
+                } 
             }
 
             // 座机
             if (PublicConfig.ExportZuoJi)
             {
-                foreach (string phone in DtZuoJi.Keys)
+                foreach (string phone in DtZuoJi)
                 {
                     PhoneData[phone] = string.Empty;
                 }
             }
+
         }
 
         private void addPhone(string sPhone)
@@ -66,11 +101,11 @@ namespace PhoneFilter
             if (PublicUtil.IsPhoneNumber(sPhone))
             {
                 if (sPhone.Length > 11) sPhone = sPhone.Substring(0, 11);
-                DtPhone[sPhone] = string.Empty;
+                DtPhone.Add(sPhone);
             }
             if (PublicUtil.IsZuoJiNumber(sPhone))
             {
-                DtZuoJi[sPhone] = string.Empty;
+                DtZuoJi.Add(sPhone);
             }
         }
 
@@ -78,11 +113,11 @@ namespace PhoneFilter
         {
             if (PublicUtil.IsPhoneNumber(sPhone))
             {
-                DtMorePhone[sPhone] = string.Empty;
+                DtMorePhone.Add(sPhone);
             }
             if (PublicUtil.IsZuoJiNumber(sPhone))
             {
-                DtZuoJi[sPhone] = string.Empty;
+                DtZuoJi.Add(sPhone);
             }
         }
 
@@ -90,11 +125,11 @@ namespace PhoneFilter
         {
             if (PublicUtil.IsPhoneNumber(sPhone))
             {
-                DtGSNBPhone[sPhone] = string.Empty;
+                DtGSNBPhone.Add(sPhone);
             }
             if (PublicUtil.IsZuoJiNumber(sPhone))
             {
-                DtZuoJi[sPhone] = string.Empty;
+                DtZuoJi.Add(sPhone);
             }
         }
 
@@ -137,9 +172,9 @@ namespace PhoneFilter
         public int getPhoneNum()
         {
             int phoneNum = 0;
-            phoneNum += DtPhone.Keys.Count;
-            phoneNum += DtMorePhone.Keys.Count;
-            phoneNum += DtZuoJi.Keys.Count;
+            phoneNum += DtPhone.Count;
+            phoneNum += DtMorePhone.Count;
+            phoneNum += DtZuoJi.Count;
             return phoneNum;
         }
 

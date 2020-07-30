@@ -59,6 +59,9 @@ namespace PhoneFilter
             chbFilterSamePhone.Checked = PublicConfig.FilterSamePhone;
             txbFileRowNum.Text = PublicConfig.FileRowNum.ToString();
             txbSaveDir.Text = PublicConfig.SaveDir;
+
+            chbGetFirstPhone.Checked = PublicConfig.GetFirstPhone;
+            chbGetSecondPhone.Checked = PublicConfig.GetSecondPhone;
         }
 
         private void chbFilterSamePhone_CheckedChanged(object sender, EventArgs e)
@@ -73,6 +76,24 @@ namespace PhoneFilter
             PublicConfig.SaveDir = txbSaveDir.Text;
             PublicConfig.InitFilterCompanyName();
             PublicConfig.SaveConfig();
+        }
+
+        private void chbGetFirstPhone_CheckedChanged(object sender, EventArgs e)
+        {
+            PublicConfig.GetFirstPhone = chbGetFirstPhone.Checked;
+            if(PublicConfig.GetFirstPhone)
+            {
+                chbGetSecondPhone.Checked = false;
+            }
+        }
+
+        private void chbGetSecondPhone_CheckedChanged(object sender, EventArgs e)
+        {
+            PublicConfig.GetSecondPhone = chbGetSecondPhone.Checked;
+            if(PublicConfig.GetSecondPhone)
+            {
+                chbGetFirstPhone.Checked = false;
+            }
         }
     }
 }
