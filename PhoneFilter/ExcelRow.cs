@@ -15,6 +15,7 @@ namespace PhoneFilter
         public string MorePhone = string.Empty;
 
         public Dictionary<string, string> DtPhone = new Dictionary<string,string>(); // 手机号
+        public Dictionary<string, string> DtGSNBPhone = new Dictionary<string, string>(); // 工商年报手机号
         public Dictionary<string, string> DtMorePhone = new Dictionary<string, string>(); // 更多手机号
         public Dictionary<string, string> DtZuoJi = new Dictionary<string,string>(); // 座机号
 
@@ -23,6 +24,7 @@ namespace PhoneFilter
 
         public void parsePhoneData()
         {
+            // 手机
             if(PublicConfig.ExportPhone)
             {
                 foreach(string phone in DtPhone.Keys)
@@ -31,6 +33,16 @@ namespace PhoneFilter
                 }
             }
 
+            // 工商年报电话
+            if(PublicConfig.ExportGSNB)
+            {
+                foreach (string phone in DtGSNBPhone.Keys)
+                {
+                    PhoneData[phone] = string.Empty;
+                }
+            }
+
+            // 更多电话
             if(PublicConfig.ExportMorePhone)
             {
                 foreach (string phone in DtMorePhone.Keys)
@@ -39,6 +51,7 @@ namespace PhoneFilter
                 }
             }
 
+            // 座机
             if (PublicConfig.ExportZuoJi)
             {
                 foreach (string phone in DtZuoJi.Keys)
@@ -73,6 +86,18 @@ namespace PhoneFilter
             }
         }
 
+        private void addGSNBPhone(string sPhone)
+        {
+            if (PublicUtil.IsPhoneNumber(sPhone))
+            {
+                DtGSNBPhone[sPhone] = string.Empty;
+            }
+            if (PublicUtil.IsZuoJiNumber(sPhone))
+            {
+                DtZuoJi[sPhone] = string.Empty;
+            }
+        }
+
         public void ParsePhone()
         {
 
@@ -87,7 +112,7 @@ namespace PhoneFilter
                 string[] dataList = GSNB.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach(string data in dataList)
                 {
-                    addPhone(data.Trim());
+                    addGSNBPhone(data.Trim());
                 }
             }
 

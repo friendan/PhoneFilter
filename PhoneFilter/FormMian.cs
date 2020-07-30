@@ -19,6 +19,7 @@ namespace PhoneFilter
         {
             InitializeComponent();
             LogHelper.txbLog = this.txbLog;
+            this.Text = "手机号导出";
         }
 
         private void FormMian_Load(object sender, EventArgs e)
