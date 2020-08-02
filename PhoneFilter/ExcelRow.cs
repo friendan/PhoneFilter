@@ -152,6 +152,13 @@ namespace PhoneFilter
                         addPhone(data2);
                     }
                 }
+
+                dataList = Phone.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string data in dataList)
+                {
+                    addPhone(data);
+                }
+
             }
             //addPhone(Phone);
 

@@ -127,7 +127,6 @@ namespace PhoneFilter
                     continue;
                 }
 
-                
 
                 // 模板只有3列
                 if(isTemplate)
@@ -135,7 +134,7 @@ namespace PhoneFilter
                     excelRow.Name = cells.GetCell(row, 1).StringValue;   // 法定代表人
                     data = cells.GetCell(row, 2).StringValue;
                     data = data.Replace("；", ";");
-                    data = data.Replace(" ", "");
+                    data = data.Replace(", ", ";");
                     excelRow.Phone = data.Trim();
                 }
                 else
