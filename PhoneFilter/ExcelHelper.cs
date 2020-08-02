@@ -103,7 +103,13 @@ namespace PhoneFilter
             Cells cells = workbook.Cells;
             string data = string.Empty;
 
-            for (int row = 2; row <= cells.MaxDataRow; row++)
+            int row = 2;
+            if(isTemplate)
+            {
+                row = 0;
+            }
+
+            for (; row <= cells.MaxDataRow; row++)
             {
                 ExcelRow excelRow = new ExcelRow();
 
@@ -128,7 +134,6 @@ namespace PhoneFilter
                 {
                     excelRow.Name = cells.GetCell(row, 1).StringValue;   // 法定代表人
                     data = cells.GetCell(row, 2).StringValue;
-                    data = data.Replace(" ", ";");
                     data = data.Replace("；", ";");
                     data = data.Replace(" ", "");
                     excelRow.Phone = data.Trim();

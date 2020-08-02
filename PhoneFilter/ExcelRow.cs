@@ -135,9 +135,25 @@ namespace PhoneFilter
 
         public void ParsePhone()
         {
-
             // 联系电话
-            addPhone(Phone);
+            // "江成如先生(经理):021-61555959;江先生:15316888558;江成如先生(经理):15316888558;"
+            {
+                //if(Name == "王亚宇")
+                //{
+                //    Console.WriteLine("debug");
+                //}
+
+                string[] dataList = Phone.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string data in dataList)
+                {
+                    string[] dataList2 = data.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach(string data2 in dataList2)
+                    {
+                        addPhone(data2);
+                    }
+                }
+            }
+            //addPhone(Phone);
 
             // 工商年报电话
             // 0313-6219828; 13833319661; 
