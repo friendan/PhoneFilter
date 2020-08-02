@@ -121,6 +121,11 @@ namespace PhoneFilter
             this.TopMost = chbTopMost.Checked;
         }
 
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            LogHelper.clearLog();
+        }
+
        
     }
 }

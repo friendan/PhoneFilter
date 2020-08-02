@@ -80,12 +80,28 @@ namespace PhoneFilter
 
         }
 
+        public static bool IsTemplateFile(string path)
+        {
+            Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(path);
+            Worksheet workbook = wk.Worksheets[0];
+            Cells cells = workbook.Cells;
+            if (cells.MaxColumn == 2) // 只有3列 0 1 2
+            {
+                PublicConfig.ExportPhone = true; // 使用模板时 必须导出电话
+                return true;
+            }
+            return false;
+        }
+
         private static List<ExcelRow> getRowList(string path)
         {
+            bool isTemplate = IsTemplateFile(path);
+
             List<ExcelRow> listRow = new List<ExcelRow>();
             Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(path);
             Worksheet workbook = wk.Worksheets[0];
             Cells cells = workbook.Cells;
+            string data = string.Empty;
 
             for (int row = 2; row <= cells.MaxDataRow; row++)
             {
@@ -96,13 +112,27 @@ namespace PhoneFilter
                     continue;
                 }
 
-                excelRow.Name        = cells.GetCell(row, 2).StringValue;   // 法定代表人
-                excelRow.Phone       = cells.GetCell(row, 11).StringValue;
-                excelRow.GSNB        = cells.GetCell(row, 12).StringValue;   // 工商年报电话
-                excelRow.MorePhone   = cells.GetCell(row, 13).StringValue;
+                excelRow.Name        = cells.GetCell(row, 1).StringValue;   // 法定代表人
+
+                // 模板只有3列
+                if(isTemplate)
+                {
+                    data = cells.GetCell(row, 2).StringValue;
+                    data = data.Replace(" ", ";");
+                    data = data.Replace("；", ";");
+                    data = data.Replace(" ", "");
+                    excelRow.Phone = data.Trim();
+                }
+                else
+                {
+                    excelRow.Phone = cells.GetCell(row, 11).StringValue;
+                    excelRow.GSNB = cells.GetCell(row, 12).StringValue;   // 工商年报电话
+                    excelRow.MorePhone = cells.GetCell(row, 13).StringValue;
+                }
+
                 excelRow.ParsePhone();
                 excelRow.parsePhoneData();
-
+               
                 listRow.Add(excelRow);
             }
 
