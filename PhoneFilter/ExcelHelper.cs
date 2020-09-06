@@ -58,38 +58,64 @@ namespace PhoneFilter
             string dstFileName = System.IO.Path.GetFileNameWithoutExtension(path);
 
 
-            string dstFilePath = string.Format(@"{0}\{1}\邮箱_{2}.txt",
+            string mailPath = string.Format(@"{0}\{1}\非QQ邮箱_{2}.txt",
                 PublicConfig.SaveDir,
                 dstFileName,
                 dstFileName);
-            PublicUtil.MakeSureDirectoryPathExists(dstFilePath);
+
+            string qqMailPath = string.Format(@"{0}\{1}\QQ邮箱_{2}.txt",
+               PublicConfig.SaveDir,
+               dstFileName,
+               dstFileName);
+
+            PublicUtil.MakeSureDirectoryPathExists(mailPath);
 
             List<ExcelRow> listRow = getRowList(path);
-            SaveMail(listRow, dstFilePath);
+            SaveMail(listRow, mailPath, qqMailPath);
         }
 
-        public static void SaveMail(List<ExcelRow> listRow, string mailPath)
+        public static void SaveMail(List<ExcelRow> listRow, string mailPath, string qqMailPath)
         {
             try
             {
                 if (listRow.Count <= 0) return;
                 //if (File.Exists(mailPath)) File.Delete(mailPath);
                 StreamWriter sw = new StreamWriter(mailPath, false, System.Text.Encoding.UTF8);
+                StreamWriter swQQMail = new StreamWriter(qqMailPath, false, System.Text.Encoding.UTF8);
                 string line = string.Empty;
                 foreach (ExcelRow row in listRow)
                 {
                     foreach(string mail in  row.ListMail)
                     {
                         line = string.Format("{0} {1}", row.Name, mail);
-                        sw.WriteLine(line);
+                        if (IsQQMail(mail))
+                        {
+                            swQQMail.WriteLine(line);
+                        }
+                        else
+                        {
+                            sw.WriteLine(line);
+                        }
+                       
                     }
                 }
                 sw.Close();
+                swQQMail.Close();
+
             }
             catch(Exception ex)
             {
                 LogHelper.showLog(ex);
             }
+        }
+
+        public static bool IsQQMail(string mail)
+        {
+            bool retVal = false;
+            if (mail.IndexOf("@qq") > 0) retVal = true;
+            if (mail.IndexOf("@QQ") > 0) retVal = true;
+
+            return retVal;
         }
 
         public static void ParseVcf(string path)
