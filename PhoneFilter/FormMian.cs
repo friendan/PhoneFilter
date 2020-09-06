@@ -126,6 +126,31 @@ namespace PhoneFilter
             LogHelper.clearLog();
         }
 
+        private void btnExportMail_Click(object sender, EventArgs e)
+        {
+            if (System.IO.File.Exists(mExcelPath) == false)
+            {
+                LogHelper.showLog("文件不存在：" + mExcelPath);
+                return;
+            }
+
+            btnExportMail.Enabled = false;
+            LogHelper.showLog(mExcelPath);
+            LogHelper.showLog("正在导出邮箱文件，请稍后...");
+
+            Thread t = new Thread(delegate()
+            {
+                ExcelHelper.ParseMail(mExcelPath);
+                LogHelper.showLog("导出邮箱文件完毕！");
+                this.BeginInvoke((ThreadStart)delegate()
+                {
+                    btnExportMail.Enabled = true;
+                });
+
+            });
+            t.Start();
+        }
+
        
     }
 }

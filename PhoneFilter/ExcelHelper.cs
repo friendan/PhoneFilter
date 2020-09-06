@@ -47,6 +47,51 @@ namespace PhoneFilter
 
         }
 
+        public static void ParseMail(string path)
+        {
+            if (System.IO.File.Exists(path) == false)
+            {
+                LogHelper.showLog("文件不存在：" + path);
+                return;
+            }
+
+            string dstFileName = System.IO.Path.GetFileNameWithoutExtension(path);
+
+
+            string dstFilePath = string.Format(@"{0}\{1}\邮箱_{2}.txt",
+                PublicConfig.SaveDir,
+                dstFileName,
+                dstFileName);
+            PublicUtil.MakeSureDirectoryPathExists(dstFilePath);
+
+            List<ExcelRow> listRow = getRowList(path);
+            SaveMail(listRow, dstFilePath);
+        }
+
+        public static void SaveMail(List<ExcelRow> listRow, string mailPath)
+        {
+            try
+            {
+                if (listRow.Count <= 0) return;
+                //if (File.Exists(mailPath)) File.Delete(mailPath);
+                StreamWriter sw = new StreamWriter(mailPath, false, System.Text.Encoding.UTF8);
+                string line = string.Empty;
+                foreach (ExcelRow row in listRow)
+                {
+                    foreach(string mail in  row.ListMail)
+                    {
+                        line = string.Format("{0} {1}", row.Name, mail);
+                        sw.WriteLine(line);
+                    }
+                }
+                sw.Close();
+            }
+            catch(Exception ex)
+            {
+                LogHelper.showLog(ex);
+            }
+        }
+
         public static void ParseVcf(string path)
         {
             if (System.IO.File.Exists(path) == false)
@@ -127,6 +172,15 @@ namespace PhoneFilter
                     continue;
                 }
 
+                // 企查猫 有邮箱
+                if (cells.MaxColumn == 16)
+                {
+                    string mail = cells.GetCell(row, 14).StringValue.Trim();
+                    if(mail.IndexOf("@") > 0)
+                    {
+                        excelRow.ListMail.Add(mail);
+                    }
+                }
 
                 // 模板只有3列
                 if(isTemplate)

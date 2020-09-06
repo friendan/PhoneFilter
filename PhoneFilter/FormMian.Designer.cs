@@ -36,6 +36,7 @@
             this.menuItemConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.chbTopMost = new System.Windows.Forms.CheckBox();
             this.btnClearLog = new System.Windows.Forms.Button();
+            this.btnExportMail = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,12 +110,23 @@
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
+            // btnExportMail
+            // 
+            this.btnExportMail.Location = new System.Drawing.Point(652, 45);
+            this.btnExportMail.Name = "btnExportMail";
+            this.btnExportMail.Size = new System.Drawing.Size(121, 38);
+            this.btnExportMail.TabIndex = 5;
+            this.btnExportMail.Text = "导出邮箱";
+            this.btnExportMail.UseVisualStyleBackColor = true;
+            this.btnExportMail.Click += new System.EventHandler(this.btnExportMail_Click);
+            // 
             // FormMian
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(902, 443);
+            this.Controls.Add(this.btnExportMail);
             this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.chbTopMost);
             this.Controls.Add(this.btnExportVcf);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemConfig;
         private System.Windows.Forms.CheckBox chbTopMost;
         private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.Button btnExportMail;
     }
 }
 

@@ -18,6 +18,7 @@ namespace PhoneFilter
         public List<string> DtGSNBPhone = new List<string>();   // 工商年报手机号
         public List<string> DtMorePhone = new List<string>();   // 更多手机号
         public List<string> DtZuoJi = new List<string>();       // 座机号
+        public List<string> ListMail = new List<string>();          // 邮箱
 
         // 解析好的电话  直接保存这个就好
         public Dictionary<string, string> PhoneData = new Dictionary<string, string>();
